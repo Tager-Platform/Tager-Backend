@@ -60,42 +60,42 @@ This project was engineered to production standards deliberately, as a demonstra
 
 ```
 ┌──────────────────────────────────────────────────────────────────┐
-│                         Instagram Graph API                       │
-│                    (DMs, OAuth, Webhooks, HMAC)                   │
-└───────────────────────────────┬────────────────────────────────────┘
+│                         Instagram Graph API                      │
+│                    (DMs, OAuth, Webhooks, HMAC)                  │
+└───────────────────────────────┬──────────────────────────────────┘
                                  │  Webhook Event
                                  ▼
                  ┌───────────────────────────────┐
-                 │   IChannelProvider (Strategy)  │  ← extensible: WhatsApp,
-                 │   ChannelProviderFactory       │     Facebook, TikTok next
+                 │   IChannelProvider (Strategy) │  ← extensible: WhatsApp,
+                 │   ChannelProviderFactory      │     Facebook, TikTok next
                  └───────────────┬───────────────┘
                                  ▼
-                 ┌───────────────────────────────┐
-                 │      WebhookOrchestrator        │
-                 │   (Unit of Work · single commit)│
-                 └───────┬───────────────┬────────┘
+                 ┌──────────────────────────────────┐
+                 │      WebhookOrchestrator         │
+                 │   (Unit of Work · single commit) │
+                 └───────┬───────────────┬──────────┘
                          ▼               ▼
-              ┌─────────────────┐  ┌───────────────────┐
-              │  PostgreSQL      │  │  SignalR Hub        │
-              │  (tenant-scoped) │  │  /hubs/inbox         │
-              └─────────────────┘  │  (tenant-grouped push)│
-                                    └───────────────────┘
+              ┌──────────────────┐  ┌────────────────────────┐
+              │  PostgreSQL      │  │  SignalR Hub           │
+              │  (tenant-scoped) │  │  /hubs/inbox           │
+              └──────────────────┘  │  (tenant-grouped push) │
+                                    └────────────────────────┘
                                  │
                                  ▼
-                 ┌───────────────────────────────┐
-                 │        AI Engine (Phase 2+)     │
-                 │  Arabic/Franco NLP → Intent      │
-                 │  → Order Extraction (confidence) │
-                 │  → Reply Suggestions             │
-                 │  → Safety Guardrails             │
+                 ┌───────────────────────────────────┐
+                 │        AI Engine (Phase 2+)       │
+                 │  Arabic/Franco NLP → Intent       │
+                 │  → Order Extraction (confidence)  │
+                 │  → Reply Suggestions              │
+                 │  → Safety Guardrails              │
                  │  → Supervised Auto-send (Phase 3) │
-                 └───────────────────────────────┘
+                 └───────────────────────────────────┘
                                  │
                                  ▼
                  ┌───────────────────────────────┐
-                 │   Angular 21 (Signals) SPA      │
-                 │   Standalone components          │
-                 │   Tailwind v4 · Lazy-loaded       │
+                 │   Angular 21 (Signals) SPA    │
+                 │   Standalone components       │
+                 │   Tailwind v4 · Lazy-loaded   │
                  └───────────────────────────────┘
 ```
 
